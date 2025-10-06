@@ -29,7 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/movie-booking', {
+mongoose.connect(process.env.MONGODB_URI, {
   // Removed deprecated options - useNewUrlParser and useUnifiedTopology are no longer needed
 })
 .then(() => console.log('MongoDB connected successfully'))
