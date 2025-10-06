@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -11,15 +11,7 @@ const Movies = () => {
   const [selectedGenre, setSelectedGenre] = useState('All');
   const [sortBy, setSortBy] = useState('title');
 
-  useEffect(() => {
-    fetchMovies();
-  }, []);
-
-  useEffect(() => {
-    filterAndSortMovies();
-  }, [movies, searchTerm, selectedGenre, sortBy]);
-
-  const fetchMovies = async () => {
+  const fetchMovies = useCallback(async () => {
     try {
       setLoading(true);
       const response = await axios.get('/movies');
@@ -30,9 +22,13 @@ const Movies = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const filterAndSortMovies = () => {
+  useEffect(() => {
+    fetchMovies();
+  }, [fetchMovies]);
+
+  const filterAndSortMovies = useCallback(() => {
     let filtered = movies;
 
     // Filter by search term
@@ -65,16 +61,11 @@ const Movies = () => {
     });
 
     setFilteredMovies(filtered);
-  };
+  }, [movies, searchTerm, selectedGenre, sortBy]);
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      weekday: 'short',
-      month: 'short',
-      day: 'numeric'
-    });
-  };
+  useEffect(() => {
+    filterAndSortMovies();
+  }, [filterAndSortMovies]);
 
   const formatTime = (timeString) => {
     return timeString;

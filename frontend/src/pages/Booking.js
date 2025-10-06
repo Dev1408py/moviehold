@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
@@ -15,6 +15,19 @@ const Booking = () => {
   const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
 
+  const fetchShowtimeDetails = useCallback(async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(`/movies/${showtimeId}/showtimes/${showtimeId}`);
+      setShowtime(response.data);
+    } catch (error) {
+      console.error('Error fetching showtime details:', error);
+      setError('Failed to load showtime details. Please try again later.');
+    } finally {
+      setLoading(false);
+    }
+  }, [showtimeId]);
+
   useEffect(() => {
     // Wait for auth to finish loading before checking user
     if (authLoading) {
@@ -26,20 +39,7 @@ const Booking = () => {
       return;
     }
     fetchShowtimeDetails();
-  }, [showtimeId, user, authLoading, navigate]);
-
-  const fetchShowtimeDetails = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(`/movies/${showtimeId}/showtimes/${showtimeId}`);
-      setShowtime(response.data);
-    } catch (error) {
-      console.error('Error fetching showtime details:', error);
-      setError('Failed to load showtime details. Please try again later.');
-    } finally {
-      setLoading(false);
-    }
-  };
+  }, [showtimeId, user, authLoading, navigate, fetchShowtimeDetails]);
 
   const handleSeatClick = (seatId) => {
     if (selectedSeats.includes(seatId)) {
