@@ -1,4 +1,4 @@
-# 🎬 CineFlix - Movie Ticket Booking System
+# 🎬 DevFlix - Movie Ticket Booking System
 
 A full-stack movie ticket booking application built with React (frontend) and Node.js/Express (backend) with MongoDB database.
 
