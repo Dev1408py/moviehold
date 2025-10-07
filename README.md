@@ -59,7 +59,7 @@ A full-stack movie ticket booking application built with React (frontend) and No
 6. **Configure Frontend Environment:**
    Update API URL in `src/config.js` or set environment variable:
    ```env
-   REACT_APP_API_URL=http://localhost:5000/api
+   REACT_APP_API_URL=https://moviehold-production-22ae.up.railway.app/api
    ```
 
 7. **Start Frontend:**
@@ -84,7 +84,7 @@ A full-stack movie ticket booking application built with React (frontend) and No
    - Connect your GitHub repository to Netlify
    - Set build command: `npm run build`
    - Set publish directory: `build`
-   - Add environment variable: `REACT_APP_API_URL=https://cineflix-backend.onrender.com/api`
+   - Add environment variable: `REACT_APP_API_URL=https://moviehold-production-22ae.up.railway.app/api`
 
 3. **Alternative Manual Deploy:**
    ```bash
@@ -111,7 +111,7 @@ A full-stack movie ticket booking application built with React (frontend) and No
 ### Production URLs
 
 - **Frontend:** `https://cineflix-movie-booking.netlify.app`
-- **Backend:** `https://cineflix-backend.onrender.com`
+- **Backend:** `https://moviehold-production-22ae.up.railway.app`
 - **MongoDB:** `mongodb+srv://...` (Atlas cluster)
 
 ## 📁 Project Structure
@@ -150,7 +150,7 @@ NODE_ENV=development
 
 **Frontend (.env):**
 ```env
-REACT_APP_API_URL=http://localhost:5000/api
+REACT_APP_API_URL=https://moviehold-production-22ae.up.railway.app/api
 ```
 
 ### Database Models
